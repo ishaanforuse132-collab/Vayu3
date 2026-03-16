@@ -1,0 +1,98 @@
+:root {
+    --purple: #a855f7;
+    --dark: #0a0a0a;
+    --glass: rgba(255, 255, 255, 0.05);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+
+body {
+    background-color: var(--dark);
+    color: white;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* --- HAMBURGER --- */
+.hamburger {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    background: var(--glass);
+    border: 1px solid rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.bar { width: 25px; height: 2px; background: var(--purple); transition: 0.3s; box-shadow: 0 0 10px var(--purple); }
+
+.hamburger.active .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.active .bar:nth-child(2) { opacity: 0; }
+.hamburger.active .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* --- LAYOUT --- */
+.app-container { display: flex; height: 100%; }
+
+.sidebar {
+    width: 280px;
+    background: rgba(15, 15, 15, 0.95);
+    border-right: 1px solid rgba(255,255,255,0.05);
+    padding: 40px 20px;
+    transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+    position: absolute;
+    height: 100%;
+    z-index: 999;
+}
+
+/* Hide sidebar by default on mobile */
+@media (max-width: 768px) {
+    .sidebar { transform: translateX(-100%); }
+    .sidebar.active { transform: translateX(0); }
+}
+
+/* Show sidebar by default on Desktop */
+@media (min-width: 769px) {
+    .sidebar { position: relative; transform: translateX(0); }
+    .hamburger { display: none; }
+}
+
+.interaction-zone {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background: radial-gradient(circle at top right, #1a1025, #0a0a0a);
+}
+
+.input-area {
+    margin-top: auto;
+    display: flex;
+    gap: 10px;
+    background: var(--glass);
+    padding: 15px;
+    border-radius: 15px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: white;
+    outline: none;
+}
+
+button#sendBtn {
+    background: var(--purple);
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+}
